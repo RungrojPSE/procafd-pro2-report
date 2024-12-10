@@ -1,0 +1,270 @@
+{
+  "components": [
+    {
+      "label": "A",
+      "value": "HYDROGEN"
+    },
+    {
+      "label": "B",
+      "value": "METHANE"
+    },
+    {
+      "label": "C",
+      "value": "TOLUENE"
+    },
+    {
+      "label": "D",
+      "value": "Benzene"
+    },
+    {
+      "label": "E",
+      "value": "1,1\u0027-Biphenyl"
+    }
+  ],
+  "processes": [
+    {
+      "label": "i",
+      "value": "Inlet"
+    },
+    {
+      "label": "re",
+      "value": "Reactor"
+    },
+    {
+      "label": "fl",
+      "value": "Flash Separator"
+    },
+    {
+      "label": "dl",
+      "value": "Distillation Column"
+    },
+    {
+      "label": "prg",
+      "value": "Purge"
+    },
+    {
+      "label": "o",
+      "value": "Outlet"
+    }
+  ],
+  "esfiles": [
+    "(iC) (reABC/ABCDE)\u003C1\u003C2 [\u003C(iAB)] (flECD/AB) [(prgAB/AB)1 (oAB)] (dlEC/D) [(oD)] (dlE/C) [(oE)] (prgC/C)2 (oC)"
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "label": "(iC)",
+      "level": 0,
+      "properties": {
+        "kind": "Start"
+      }
+    },
+    {
+      "id": 2,
+      "label": "(iAB)",
+      "level": 0,
+      "properties": {
+        "kind": "Start"
+      }
+    },
+    {
+      "id": 3,
+      "label": "(reABC/ABCDE)",
+      "level": 1,
+      "properties": {
+        "kind": "Reactor"
+      }
+    },
+    {
+      "id": 4,
+      "label": "(flECD/AB)",
+      "level": 2,
+      "properties": {
+        "kind": "Flash Separator"
+      }
+    },
+    {
+      "id": 5,
+      "label": "(dlEC/D)",
+      "level": 3,
+      "properties": {
+        "kind": "Distillation Column"
+      }
+    },
+    {
+      "id": 7,
+      "label": "(prgAB/AB)",
+      "level": 3,
+      "properties": {
+        "kind": "Splitter"
+      }
+    },
+    {
+      "id": 6,
+      "label": "(dlE/C)",
+      "level": 4,
+      "properties": {
+        "kind": "Distillation Column"
+      }
+    },
+    {
+      "id": 9,
+      "label": "(oAB)",
+      "level": 4,
+      "properties": {
+        "kind": "End"
+      }
+    },
+    {
+      "id": 11,
+      "label": "(oD)",
+      "level": 4,
+      "properties": {
+        "kind": "End"
+      }
+    },
+    {
+      "id": 8,
+      "label": "(prgC/C)",
+      "level": 5,
+      "properties": {
+        "kind": "Splitter"
+      }
+    },
+    {
+      "id": 12,
+      "label": "(oE)",
+      "level": 5,
+      "properties": {
+        "kind": "End"
+      }
+    },
+    {
+      "id": 10,
+      "label": "(oC)",
+      "level": 6,
+      "properties": {
+        "kind": "End"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": 1,
+      "from": 1,
+      "to": 3,
+      "label": "C",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 2,
+      "from": 2,
+      "to": 3,
+      "label": "AB",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 3,
+      "from": 3,
+      "to": 4,
+      "label": "ABCDE",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 4,
+      "from": 4,
+      "to": 5,
+      "label": "ECD",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 5,
+      "from": 4,
+      "to": 7,
+      "label": "AB",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 6,
+      "from": 5,
+      "to": 6,
+      "label": "EC",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 7,
+      "from": 5,
+      "to": 11,
+      "label": "D",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 9,
+      "from": 6,
+      "to": 8,
+      "label": "C",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 8,
+      "from": 6,
+      "to": 12,
+      "label": "E",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 10,
+      "from": 7,
+      "to": 3,
+      "label": "AB",
+      "properties": {
+        "recycle": true
+      }
+    },
+    {
+      "id": 11,
+      "from": 7,
+      "to": 9,
+      "label": "AB",
+      "properties": {
+        "recycle": false
+      }
+    },
+    {
+      "id": 12,
+      "from": 8,
+      "to": 3,
+      "label": "C",
+      "properties": {
+        "recycle": true
+      }
+    },
+    {
+      "id": 13,
+      "from": 8,
+      "to": 10,
+      "label": "C",
+      "properties": {
+        "recycle": false
+      }
+    }
+  ]
+}

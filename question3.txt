@@ -1,0 +1,35 @@
+In python, By given the operation I want to convert it into graph data nodes and edges
+```
+[
+  {'unit': 'START',
+  'uid': 'IC-HI',
+  'name': 'Start point',
+  'inlets': [],
+  'outlets': ['IC-HI']},
+  {'unit': 'START',
+  'uid': 'IAB-HI',
+  'name': 'Start point',
+  'inlets': [],
+  'outlets': ['IAB-HI']},
+  {'unit': 'HX',
+  'uid': 'HX1-IC',
+  'name': 'Heater for Toluene feed stream',
+  'inlets': ['IC-HI'],
+  'outlets': ['IC']},
+ {'unit': 'HX',
+  'uid': 'HX0-IAB',
+  'name': 'Heater for Hydrogen feed stream',
+  'inlets': ['IAB-HI'],
+  'outlets': ['IAB']},
+ {'unit': 'MIXER',
+  'uid': 'M1-R1',
+  'name': 'Mixer before reactor',
+  'inlets': ['IC', 'IAB'],
+  'outlets': ['FRT']}
+  {'unit': 'END',
+  'uid': 'FRT',
+  'name': 'End point',
+  'inlets': ['FRT'],
+  'outlets': []}
+]
+```

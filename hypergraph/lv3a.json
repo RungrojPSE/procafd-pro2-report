@@ -1,0 +1,357 @@
+{
+  "components": [
+    {
+      "label": "A",
+      "value": "Hydrogen"
+    },
+    {
+      "label": "B",
+      "value": "Methane"
+    },
+    {
+      "label": "C",
+      "value": "Toluene"
+    },
+    {
+      "label": "D",
+      "value": "Benzene"
+    },
+    {
+      "label": "E",
+      "value": "1,1\u0027-Biphenyl"
+    }
+  ],
+  "processes": [
+    { "label": "E1-E4", "value": "Heat Exchanger" },
+    { "label": "C1", "value": "Compressor" },
+    { "label": "P1", "value": "Pump" },
+    { "label": "M1", "value": "Mixer" },
+    { "label": "R1", "value": "Reactor" },
+    { "label": "F1", "value": "Flash Drum" },
+    { "label": "D1-D3", "value": "Distillation Column" },
+    { "label": "S1-S2", "value": "Splitter" }
+  ],
+  "roles": [
+    { "label": "Input Components", "value": "#63a2ff" },
+    { "label": "Recycled Components", "value": "#6EC207" },
+    { "label": "Released Components", "value": "#f49689" },
+    { "label": "Output Components", "value": "#fdc62c" },
+    { "label": "Linked Components", "value": "#f9f9f9" }
+  ],
+  "esfiles": [
+    "(iC)",
+    "(mABC)<1<2",
+    "[<(iAB)]",
+    "(eABC)",
+    "(reABC/ABCDE)",
+    "(eABCDE)",
+    "(flAB/ABECD)",
+    "[(prgAB/AB)[(oAB)](cAB)1]",
+    "(dlAB/CDE)",
+    "[(oAB)]",
+    "(dlD/CE)",
+    "[(eD)(oD)]",
+    "(dlC/E)",
+    "[(eE)(oE)]",
+    "(prgC/C)",
+    "[(oC)]",
+    "(pC)2"
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "label": "C",
+      "level": 0,
+      "properties": { "role": "Input Components" }
+    },
+    {
+      "id": 2,
+      "label": "AB",
+      "level": 0,
+      "properties": { "role": "Input Components" }
+    },
+    {
+      "id": 3,
+      "label": "ABC",
+      "level": 1,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 4,
+      "label": "ABC",
+      "level": 2,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 5,
+      "label": "ABCDE",
+      "level": 3,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 6,
+      "label": "ABCDE",
+      "level": 4,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 7,
+      "label": "AB",
+      "level": 5,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 8,
+      "label": "ABCDE",
+      "level": 5,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 9,
+      "label": "AB",
+      "level": 6,
+      "properties": { "role": "Released Components" }
+    },
+    {
+      "id": 10,
+      "label": "AB",
+      "level": 6,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 11,
+      "label": "AB",
+      "level": 6,
+      "properties": { "role": "Released Components" }
+    },
+    {
+      "id": 12,
+      "label": "CDE",
+      "level": 6,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 13,
+      "label": "AB",
+      "level": 7,
+      "properties": { "role": "Recycled Components" }
+    },
+    {
+      "id": 14,
+      "label": "D",
+      "level": 7,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 15,
+      "label": "CE",
+      "level": 7,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 16,
+      "label": "D",
+      "level": 8,
+      "properties": { "role": "Output Components" }
+    },
+    {
+      "id": 17,
+      "label": "C",
+      "level": 8,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 18,
+      "label": "E",
+      "level": 8,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 19,
+      "label": "C",
+      "level": 9,
+      "properties": { "role": "Released Components" }
+    },
+    {
+      "id": 20,
+      "label": "C",
+      "level": 9,
+      "properties": { "role": "Linked Components" }
+    },
+    {
+      "id": 21,
+      "label": "E",
+      "level": 9,
+      "properties": { "role": "Output Components" }
+    },
+    {
+      "id": 22,
+      "label": "C",
+      "level": 10,
+      "properties": { "role": "Recycled Components" }
+    }
+  ],
+  "edges": [
+    {
+      "id": 1,
+      "from": 1,
+      "to": 3,
+      "label": "M1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 2,
+      "from": 2,
+      "to": 3,
+      "label": "M1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 3,
+      "from": 3,
+      "to": 4,
+      "label": "E1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 4,
+      "from": 4,
+      "to": 5,
+      "label": "R1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 5,
+      "from": 5,
+      "to": 6,
+      "label": "E2",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 6,
+      "from": 6,
+      "to": 7,
+      "label": "F1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 7,
+      "from": 6,
+      "to": 8,
+      "label": "F1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 8,
+      "from": 7,
+      "to": 9,
+      "label": "S1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 9,
+      "from": 7,
+      "to": 10,
+      "label": "S1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 10,
+      "from": 8,
+      "to": 11,
+      "label": "D1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 11,
+      "from": 8,
+      "to": 12,
+      "label": "D1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 12,
+      "from": 10,
+      "to": 13,
+      "label": "C1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 13,
+      "from": 12,
+      "to": 14,
+      "label": "D2",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 14,
+      "from": 12,
+      "to": 15,
+      "label": "D2",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 15,
+      "from": 13,
+      "to": 3,
+      "label": "M1",
+      "properties": { "recycle": true }
+    },
+    {
+      "id": 16,
+      "from": 14,
+      "to": 16,
+      "label": "E3",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 17,
+      "from": 15,
+      "to": 17,
+      "label": "D3",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 18,
+      "from": 15,
+      "to": 18,
+      "label": "D3",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 19,
+      "from": 17,
+      "to": 19,
+      "label": "S2",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 20,
+      "from": 17,
+      "to": 20,
+      "label": "S2",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 21,
+      "from": 18,
+      "to": 21,
+      "label": "E4",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 22,
+      "from": 20,
+      "to": 22,
+      "label": "P1",
+      "properties": { "recycle": false }
+    },
+    {
+      "id": 23,
+      "from": 22,
+      "to": 3,
+      "label": "M1",
+      "properties": { "recycle": true }
+    }
+  ]
+}

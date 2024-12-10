@@ -1,0 +1,187 @@
+In this context
+```
+FLASH UID=F1-ECD-AB, NAME=Flash Drum
+FEED ABCDE
+PRODUCT  V=AB, W=ABCDE-INT
+ISO  TEMPERATURE=330, PRESSURE=1500
+```
+I want to parse to get
+```
+{
+  "unit": "FLASH",
+  "uid": "F1-ECD-AB",
+  "name": "Flash Drum",
+  "inlets": ["ABCDE"],
+  "outlet": ["AB", "ABCDE-INT"]
+}
+```
+
+
+
+
+With python, 
+```
+def parse_compressor_block(block):
+...
+```
+In this context
+```
+  COMPRESSOR UID=PC0-RAB, NAME=Compressor for Hydrogen
+      FEED RAB-PC
+      PRODUCT  M=RAB-HI
+      OPERATION CALCULATION=ASME, COPT=SING, PRES=3445.05
+      METHOD SET=SRKM01
+```
+I want to parse to get
+```
+{
+  "unit": "COMPRESSOR",
+  "uid": "PC0-RAB",
+  "name": "Compressor for Hydrogen",
+  "inlets": ["RAB-PC"],
+  "outlets": ["RAB-HI"],
+}
+```
+
+
+
+With python, 
+```
+def parse_hx_block(block):
+...
+```
+In this context
+```
+  HX   UID=HX0-RAB, NAME=Heater for recycled Hydrogen stream
+      COLD FEED=RAB-HI, M=RAB
+      OPER CTEMP=639
+```
+I want to parse to get
+```
+{
+  "unit": "HX",
+  "uid": "HX0-RAB",
+  "name": "Heater for recycled Hydrogen stream",
+  "inlets": ["RAB-HI"],
+  "outlets": ["RAB"],
+}
+```
+
+
+
+
+In this context
+```
+FLASH UID=F1-ECD-AB, NAME=Flash Drum
+FEED ABCDE
+PRODUCT  V=AB, W=ABCDE-INT
+ISO  TEMPERATURE=330, PRESSURE=1500
+```
+I want to parse to get
+```
+{
+  "unit": "FLASH",
+  "uid": "F1-ECD-AB",
+  "name": "Flash Drum",
+  "inlets": ["ABCDE"],
+  "outlet": ["AB", "ABCDE-INT"]
+}
+```
+
+
+With python, 
+```
+def parse_stream_data(text_content):
+...
+```
+In this context
+```
+STREAM DATA
+  PROPERTY STREAM=IAB-HI, TEMPERATURE=300, PRESSURE=3445.05, PHASE=M, &
+         RATE(M)=100, COMPOSITION(M)=1,0.9/2,0.1
+  PROPERTY STREAM=IC-HI, TEMPERATURE=300, PRESSURE=3445.05, PHASE=M, &
+         RATE(M)=100, COMPOSITION(M)=3,1
+```
+I want to parse to get like
+```
+[
+{
+  "label": "IAB-HI",
+  "temperature": 300,
+  "pressure": "3445.05",
+  "composition": [[1,0.9], [2,0.1]],
+},
+{
+  "label": "IC-HI",
+  "temperature": 300,
+  "pressure": "3445.05",
+  "composition": [[3,1]],
+}
+]
+```
+
+
+With python, 
+```
+def parse_conreactor_block(block):
+...
+```
+In this context
+```
+  CONREACTOR UID=R2, NAME=Reactor 2
+      FEED INTER1
+      PRODUCT  M=ABCDE-HI
+      OPERATION ISOTHERMAL
+      RXCALCULATION MODEL=STOIC
+      RXSTOIC RXSET=2
+      REACTION 2
+      BASE COMPONENT=4
+      CONVERSION 0.15
+```
+I want to parse to get like
+```
+{
+  "unit": "CONREACTOR",
+  "uid": "R2",
+  "name": "Reactor 2",
+  "inlets": ["INTER1"],
+  "outlet": ["ABCDE-INT"]
+}
+```
+
+
+Suppose I have object
+```
+my_data = {
+    "comp": [[1,0.9], [2,0.1]],
+}
+comp = {
+    A: 0
+    B: 0
+    C: 0
+    D: 0
+    E: 0
+}
+```
+How can I set my_data into comp to get
+```
+{
+    A: 0.9
+    B: 0.1
+    C: 0
+    D: 0
+    E: 0
+}
+```
+
+[[1,0.9], [2,0.1]]
+
+
+
+
+
+
+
+
+
+

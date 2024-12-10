@@ -1,0 +1,11 @@
+with this data
+```
+nodes = [
+    {'id': 1, 'inlets': [], 'outlets': ['IC-HI']},
+    {'id': 2, 'inlets': [], 'outlets': ['IAB-HI']},
+    {'id': 3, 'inlets': ['IC-HI'], 'outlets': ['IC']},
+    {'id': 4, 'inlets': ['IAB-HI'], 'outlets': ['IAB']},
+    {'id': 5, 'inlets': ['IC', 'IAB'], 'outlets': ['FRT']},
+    {'id': 6, 'inlets': ['FRT'], 'outlets': []}
+]
+```, how can I create edge with `from` and `to` array
