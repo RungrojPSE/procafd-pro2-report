@@ -1,4 +1,4 @@
-
+import json
 
 def dfs(node, graph, visited, stack, back_edges):
     visited.add(node)
@@ -81,3 +81,79 @@ def longest_path(nodes, edges, start_node):
     # print("Longest chain:", longest_chain)
 
     return longest_chain, back_edges, graph
+
+
+def assign_level(nodes, edges, remove_cycle=0):
+    if remove_cycle == 0:
+        longest_chain, back_edges, graph = longest_path(nodes, edges, 1)
+        print(graph)
+    else:
+        graph = {}
+        for node in nodes:
+            graph[node['id']] = []
+
+        for edge in edges:
+            graph[edge['from']].append(edge['to'])
+
+
+
+    for node in nodes:
+        node['level'] = None
+    # nodes = []
+
+    # Initialize nodes with 'id' and 'level'
+    # for node_id in graph.keys():
+    #     nodes.append({'id': node_id, 'level': None})
+
+    # Helper functions to set and get levels
+    def set_level(id, level):
+        node = next((node for node in nodes if node['id'] == id), None)
+        if node:
+            node['level'] = level
+
+    def get_level(id):
+        node = next((node for node in nodes if node['id'] == id), None)
+        if node:
+            return node['level']
+        return None
+
+    # graph = {1: [2], 2: [3, 5], 3: [4], 4: [], 5: [], 6: [2]}
+    # longest_path = [1, 2, 3, 4] # will not used
+
+    # Traverse the graph and set levels
+    def traverse_and_set_levels(node_id, current_level):
+        set_level(node_id, current_level)
+        for neighbor in graph[node_id]:
+            # Only set the level if it's not already set to avoid overwriting
+            if get_level(neighbor) is None:
+                traverse_and_set_levels(neighbor, current_level + 1)
+
+    # Find root nodes (nodes with no incoming edges)
+    all_nodes = set(graph.keys())
+    non_root_nodes = {node for neighbors in graph.values() for node in neighbors} # like union of [2], [3,5], [4], [2] = {2, 3, 4, 5} 
+    root_nodes = all_nodes - non_root_nodes
+
+    # Start traversal from all root nodes
+    for root in root_nodes:
+        traverse_and_set_levels(root, 0)
+
+    create_graph_data(nodes, edges)
+
+    # Print the result
+    return nodes
+
+
+
+def create_graph_data(nodes, edges):
+    
+    # Define nodes and edges
+    data = {
+        "nodes": nodes,
+        "edges": edges
+    }
+
+    # Write the data to a JSON file
+    with open("test/data.json", "w") as json_file:
+        json.dump(data, json_file, indent=4)
+
+    print("data.json created successfully!")

@@ -36,11 +36,11 @@ def parse_ctx():
 
     #   get linked streams
     for node in nodes:
-        for outlet in node["properties"]["out"]:
+        for label in node["properties"]["out"]:
             for target_node in nodes:
-                if outlet in target_node["properties"]["in"]:
-                    if outlet not in seen_streams:
-                        seen_streams.add(outlet)
+                if label in target_node["properties"]["in"]:
+                    if label not in seen_streams:
+                        seen_streams.add(label)
 
     ending_stream = streams - seen_streams
     for st in ending_stream:
@@ -62,13 +62,13 @@ def parse_ctx():
     seen_edges = set()  # To track unique edges based on 'from' and 'to'
 
     for node in nodes:
-        for outlet in node["properties"]["out"]:
+        for label in node["properties"]["out"]:
             for target_node in nodes:
-                if outlet in target_node["properties"]["in"]:
+                if label in target_node["properties"]["in"]:
                     edge = (node["id"], target_node["id"])  # Define the edge as a tuple
                     if edge not in seen_edges:  # Check if the edge already exists
                         edge_id += 1
-                        edges.append({"id": edge_id, "from": edge[0], "to": edge[1]})
+                        edges.append({"id": edge_id, "from": edge[0], "to": edge[1], "label": label})
                         seen_edges.add(edge)  # Mark this edge as seen
 
     # for node in nodes:
@@ -85,6 +85,8 @@ def parse_ctx():
     # print(edges)
 
     create_graph_data(nodes, edges)
+
+    print(nodes)
 
     return nodes, edges
 

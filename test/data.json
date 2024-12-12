@@ -2,493 +2,50 @@
     "nodes": [
         {
             "id": 1,
-            "label": "IAB-HI",
-            "properties": {
-                "kind": "START",
-                "in": [],
-                "out": [
-                    "IAB-HI"
-                ],
-                "temperature": 300,
-                "pressure": "3445.05",
-                "composition": [
-                    [
-                        1,
-                        0.9
-                    ],
-                    [
-                        2,
-                        0.1
-                    ]
-                ]
-            }
+            "label": "1",
+            "level": 0
         },
         {
             "id": 2,
-            "label": "IC-HI",
-            "properties": {
-                "kind": "START",
-                "in": [],
-                "out": [
-                    "IC-HI"
-                ],
-                "temperature": 300,
-                "pressure": "3445.05",
-                "composition": [
-                    [
-                        3,
-                        1.0
-                    ]
-                ]
-            }
+            "label": "2",
+            "level": 1
         },
         {
             "id": 3,
-            "label": "HX1-IC",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "IC-HI"
-                ],
-                "out": [
-                    "IC"
-                ],
-                "description": "Heater for Toluene feed stream"
-            }
+            "label": "3",
+            "level": 2
         },
         {
             "id": 4,
-            "label": "HX0-IAB",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "IAB-HI"
-                ],
-                "out": [
-                    "IAB"
-                ],
-                "description": "Heater for Hydrogen feed stream"
-            }
+            "label": "4",
+            "level": 3
         },
         {
             "id": 5,
-            "label": "R1",
-            "properties": {
-                "kind": "CONREACTOR",
-                "in": [
-                    "FRT"
-                ],
-                "out": [
-                    "INTER1"
-                ],
-                "description": "Reactor 1"
-            }
-        },
-        {
-            "id": 6,
-            "label": "R2",
-            "properties": {
-                "kind": "CONREACTOR",
-                "in": [
-                    "INTER1"
-                ],
-                "out": [
-                    "ABCDE-HI"
-                ],
-                "description": "Reactor 2"
-            }
-        },
-        {
-            "id": 7,
-            "label": "HX2-ABCDE",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "ABCDE-HI"
-                ],
-                "out": [
-                    "ABCDE"
-                ],
-                "description": "Cooler after reactor"
-            }
-        },
-        {
-            "id": 8,
-            "label": "F1-ECD-AB",
-            "properties": {
-                "kind": "FLASH",
-                "in": [
-                    "ABCDE"
-                ],
-                "out": [
-                    "AB",
-                    "ABCDE-INT"
-                ],
-                "description": "Flash Drum"
-            }
-        },
-        {
-            "id": 9,
-            "label": "SP1-RAB",
-            "properties": {
-                "kind": "SPLITTER",
-                "in": [
-                    "AB"
-                ],
-                "out": [
-                    "S1-RAB",
-                    "RAB-PC"
-                ],
-                "description": "Splitter for Hydrogen"
-            }
-        },
-        {
-            "id": 10,
-            "label": "PC0-RAB",
-            "properties": {
-                "kind": "COMPRESSOR",
-                "in": [
-                    "RAB-PC"
-                ],
-                "out": [
-                    "RAB-HI"
-                ],
-                "description": "Compressor for Hydrogen"
-            }
-        },
-        {
-            "id": 11,
-            "label": "HX0-RAB",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "RAB-HI"
-                ],
-                "out": [
-                    "RAB"
-                ],
-                "description": "Heater for recycled Hydrogen stream"
-            }
-        },
-        {
-            "id": 12,
-            "label": "DIST-ECD-AB",
-            "properties": {
-                "kind": "COLUMN",
-                "in": [
-                    "ABCDE-INT"
-                ],
-                "out": [
-                    "AB-FL",
-                    "CDE"
-                ],
-                "description": "DIstillation Column 1"
-            }
-        },
-        {
-            "id": 13,
-            "label": "DIST-E-CD",
-            "properties": {
-                "kind": "COLUMN",
-                "in": [
-                    "CDE"
-                ],
-                "out": [
-                    "CD",
-                    "E"
-                ],
-                "description": "Distillation Column 2"
-            }
-        },
-        {
-            "id": 14,
-            "label": "DIST-C-D",
-            "properties": {
-                "kind": "COLUMN",
-                "in": [
-                    "CD"
-                ],
-                "out": [
-                    "D",
-                    "C"
-                ],
-                "description": "Distillation Column 3"
-            }
-        },
-        {
-            "id": 15,
-            "label": "SP1-RC",
-            "properties": {
-                "kind": "SPLITTER",
-                "in": [
-                    "C"
-                ],
-                "out": [
-                    "S1-RC",
-                    "RC-PU"
-                ],
-                "description": "Splitter for Toluene"
-            }
-        },
-        {
-            "id": 16,
-            "label": "P1-RC",
-            "properties": {
-                "kind": "PUMP",
-                "in": [
-                    "RC-PU"
-                ],
-                "out": [
-                    "RC-HI"
-                ],
-                "description": "Pump for Toluene"
-            }
-        },
-        {
-            "id": 17,
-            "label": "HX1-RC",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "RC-HI"
-                ],
-                "out": [
-                    "RC"
-                ],
-                "description": "Heater for recycled Toluene stream"
-            }
-        },
-        {
-            "id": 18,
-            "label": "M1-R1",
-            "properties": {
-                "kind": "MIXER",
-                "in": [
-                    "RAB",
-                    "RC",
-                    "IC",
-                    "IAB"
-                ],
-                "out": [
-                    "FRT"
-                ],
-                "description": "Mixer before reactor"
-            }
-        },
-        {
-            "id": 19,
-            "label": "HX1-E",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "E"
-                ],
-                "out": [
-                    "E-STORAGE"
-                ],
-                "description": "Cooler for Biphenyl to storage"
-            }
-        },
-        {
-            "id": 20,
-            "label": "HX0-D",
-            "properties": {
-                "kind": "HX",
-                "in": [
-                    "D"
-                ],
-                "out": [
-                    "D-STORAGE"
-                ],
-                "description": "Cooler for Benzene to storage"
-            }
-        },
-        {
-            "id": 21,
-            "label": "D-STORAGE",
-            "properties": {
-                "kind": "END",
-                "in": [
-                    "D-STORAGE"
-                ],
-                "out": []
-            }
-        },
-        {
-            "id": 22,
-            "label": "E-STORAGE",
-            "properties": {
-                "kind": "END",
-                "in": [
-                    "E-STORAGE"
-                ],
-                "out": []
-            }
-        },
-        {
-            "id": 23,
-            "label": "S1-RAB",
-            "properties": {
-                "kind": "END",
-                "in": [
-                    "S1-RAB"
-                ],
-                "out": []
-            }
-        },
-        {
-            "id": 24,
-            "label": "S1-RC",
-            "properties": {
-                "kind": "END",
-                "in": [
-                    "S1-RC"
-                ],
-                "out": []
-            }
-        },
-        {
-            "id": 25,
-            "label": "AB-FL",
-            "properties": {
-                "kind": "END",
-                "in": [
-                    "AB-FL"
-                ],
-                "out": []
-            }
+            "label": "5",
+            "level": 2
         }
     ],
     "edges": [
         {
-            "id": 1,
             "from": 1,
-            "to": 4
+            "to": 2
         },
         {
-            "id": 2,
+            "from": 2,
+            "to": 5
+        },
+        {
             "from": 2,
             "to": 3
         },
         {
-            "id": 3,
             "from": 3,
-            "to": 18
+            "to": 4
         },
         {
-            "id": 4,
             "from": 4,
-            "to": 18
-        },
-        {
-            "id": 5,
-            "from": 5,
-            "to": 6
-        },
-        {
-            "id": 6,
-            "from": 6,
-            "to": 7
-        },
-        {
-            "id": 7,
-            "from": 7,
-            "to": 8
-        },
-        {
-            "id": 8,
-            "from": 8,
-            "to": 9
-        },
-        {
-            "id": 9,
-            "from": 8,
-            "to": 12
-        },
-        {
-            "id": 10,
-            "from": 9,
-            "to": 23
-        },
-        {
-            "id": 11,
-            "from": 9,
-            "to": 10
-        },
-        {
-            "id": 12,
-            "from": 10,
-            "to": 11
-        },
-        {
-            "id": 13,
-            "from": 11,
-            "to": 18
-        },
-        {
-            "id": 14,
-            "from": 12,
-            "to": 25
-        },
-        {
-            "id": 15,
-            "from": 12,
-            "to": 13
-        },
-        {
-            "id": 16,
-            "from": 13,
-            "to": 14
-        },
-        {
-            "id": 17,
-            "from": 13,
-            "to": 19
-        },
-        {
-            "id": 18,
-            "from": 14,
-            "to": 20
-        },
-        {
-            "id": 19,
-            "from": 14,
-            "to": 15
-        },
-        {
-            "id": 20,
-            "from": 15,
-            "to": 24
-        },
-        {
-            "id": 21,
-            "from": 15,
-            "to": 16
-        },
-        {
-            "id": 22,
-            "from": 16,
-            "to": 17
-        },
-        {
-            "id": 23,
-            "from": 17,
-            "to": 18
-        },
-        {
-            "id": 24,
-            "from": 18,
             "to": 5
-        },
-        {
-            "id": 25,
-            "from": 19,
-            "to": 22
-        },
-        {
-            "id": 26,
-            "from": 20,
-            "to": 21
         }
     ]
 }
