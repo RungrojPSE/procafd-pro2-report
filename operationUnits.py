@@ -2,13 +2,15 @@ import re
 import json
 
 def parse_ctx():
+    # 1. get pro2 script
     file_path = "sample_full.txt"
-
     with open(file_path, "r") as file:
         text_content = file.read()
 
+    # 2. slice data into section {TITLE, COMPONENT DATA, ...}
+    # 2.1 then parse strating stream data
+    # 2.2 then parse unit operations
     sections = slice_section(text_content)
-
     nodes = []
     for text in sections:
         if text.startswith("STREAM DATA"):
@@ -16,6 +18,7 @@ def parse_ctx():
         elif text.startswith("UNIT OPERATIONS"):
             nodes.extend(parse_unit_operations(text))
 
+    # 3. assign id to each node
     node_id = 0
     for node in nodes:
         node_id += 1
@@ -90,6 +93,29 @@ def parse_ctx():
 
     return nodes, edges
 
+def slice_section(section_text):
+    """
+    Slice the context into individual section.
+    """
+    # Match lines starting with section name
+    unit_start_pattern = re.compile(
+        r"^\s*(TITLE|COMPONENT DATA|THERMODYNAMIC DATA|STREAM DATA|RXDATA|UNIT OPERATIONS|END)\b",
+        re.MULTILINE,
+    )
+    unit_positions = [
+        match.start() for match in unit_start_pattern.finditer(section_text)
+    ]
+    unit_positions.append(len(section_text))
+
+    # Slice into individual section
+    units = []
+    for i in range(len(unit_positions) - 1):
+        units.append(section_text[unit_positions[i] : unit_positions[i + 1]].strip())
+
+    return units
+
+
+
 def create_graph_data(nodes, edges):
     
     # Define nodes and edges
@@ -99,12 +125,10 @@ def create_graph_data(nodes, edges):
     }
 
     # Write the data to a JSON file
-    with open("test/data.json", "w") as json_file:
+    with open("vis-plot/data.json", "w") as json_file:
         json.dump(data, json_file, indent=4)
 
     print("data.json created successfully!")
-
-
 
 def parse_stream_data(text_content):
     # Define a list to store the parsed stream data
@@ -144,7 +168,6 @@ def parse_stream_data(text_content):
 
     return streams
 
-
 def parse_unit_operations(text_content):
     # Step 1: Slice the section into individual units
     unit_blocks = slice_units(text_content)
@@ -154,7 +177,6 @@ def parse_unit_operations(text_content):
         unit_objs.append(parse_unit(txt))
 
     return unit_objs
-
 
 def parse_unit(block):
     unit_pattern = r"^\s*(\w+)\s+UID=([\w\-]+),\s+NAME=(.+)$"
@@ -217,26 +239,6 @@ def parse_unit(block):
 
     return node
 
-def slice_section(section_text):
-    """
-    Slice the context into individual section.
-    """
-    # Match lines starting with section name
-    unit_start_pattern = re.compile(
-        r"^\s*(TITLE|COMPONENT DATA|THERMODYNAMIC DATA|STREAM DATA|RXDATA|UNIT OPERATIONS|END)\b",
-        re.MULTILINE,
-    )
-    unit_positions = [
-        match.start() for match in unit_start_pattern.finditer(section_text)
-    ]
-    unit_positions.append(len(section_text))
-
-    # Slice into individual section
-    units = []
-    for i in range(len(unit_positions) - 1):
-        units.append(section_text[unit_positions[i] : unit_positions[i + 1]].strip())
-
-    return units
 
 
 def slice_units(section_text):

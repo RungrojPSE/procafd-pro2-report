@@ -56,17 +56,20 @@ fetch(jsonUrl)
         // },
         smooth: {
           enabled: true,
-          type: "cubicBezier", // 'continuous', 'cubicBezier'
+          type: "cubicBezier", // 'continuous', 'cubicBezier', 'curvedCCW', 'curvedCW', or 'dynamic' CCW=Counter-ClockWise
           forceDirection: "horizontal",
           roundness: 0.4,
         },
       },
       layout: {
         hierarchical: {
-          direction: "LR",
+          direction: 'LR',        // 'UD' (Up-Down), 'LR' (Left-Right), etc.
           // sortMethod: 'directed', // Organizes nodes based on directed edges
           // levelSeparation: 100, // Distance between levels
-          // nodeSpacing: 150, // Distance between nodes
+          // nodeSpacing: 200,       // Adjust spacing between nodes
+          // treeSpacing: 300,       // Adjust spacing between tree levels
+          // blockShifting: true,    // Adjust block alignment to reduce overlaps
+          // edgeMinimization: true, // Try to minimize overlapping edges
         },
       },
       //   physics: {

@@ -1,0 +1,273 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "label": "IAB-HI",
+            "level": 0
+        },
+        {
+            "id": 2,
+            "label": "IC-HI",
+            "level": 0
+        },
+        {
+            "id": 3,
+            "label": "IAB",
+            "level": 1
+        },
+        {
+            "id": 4,
+            "label": "IC",
+            "level": 1
+        },
+        {
+            "id": 5,
+            "label": "FRT",
+            "level": 2
+        },
+        {
+            "id": 6,
+            "label": "INTER1",
+            "level": 3
+        },
+        {
+            "id": 7,
+            "label": "ABCDE-HI",
+            "level": 4
+        },
+        {
+            "id": 8,
+            "label": "ABCDE",
+            "level": 5
+        },
+        {
+            "id": 9,
+            "label": "AB",
+            "level": 6
+        },
+        {
+            "id": 10,
+            "label": "ABCDE-INT",
+            "level": 6
+        },
+        {
+            "id": 11,
+            "label": "S1-RAB",
+            "level": 7
+        },
+        {
+            "id": 12,
+            "label": "RAB-PC",
+            "level": 7
+        },
+        {
+            "id": 13,
+            "label": "AB-FL",
+            "level": 7
+        },
+        {
+            "id": 14,
+            "label": "CDE",
+            "level": 7
+        },
+        {
+            "id": 15,
+            "label": "RAB-HI",
+            "level": 8
+        },
+        {
+            "id": 16,
+            "label": "CD",
+            "level": 8
+        },
+        {
+            "id": 17,
+            "label": "E",
+            "level": 8
+        },
+        {
+            "id": 18,
+            "label": "RAB",
+            "level": 9
+        },
+        {
+            "id": 19,
+            "label": "D",
+            "level": 9
+        },
+        {
+            "id": 20,
+            "label": "C",
+            "level": 9
+        },
+        {
+            "id": 21,
+            "label": "E-STORAGE",
+            "level": 9
+        },
+        {
+            "id": 22,
+            "label": "D-STORAGE",
+            "level": 10
+        },
+        {
+            "id": 23,
+            "label": "S1-RC",
+            "level": 10
+        },
+        {
+            "id": 24,
+            "label": "RC-PU",
+            "level": 10
+        },
+        {
+            "id": 25,
+            "label": "RC-HI",
+            "level": 11
+        },
+        {
+            "id": 26,
+            "label": "RC",
+            "level": 12
+        }
+    ],
+    "edges": [
+        {
+            "from": 1,
+            "to": 3,
+            "label": "HX0-IAB"
+        },
+        {
+            "from": 2,
+            "to": 4,
+            "label": "HX1-IC"
+        },
+        {
+            "from": 4,
+            "to": 5,
+            "label": "M1-R1"
+        },
+        {
+            "from": 3,
+            "to": 5,
+            "label": "M1-R1"
+        },
+        {
+            "from": 6,
+            "to": 7,
+            "label": "R2"
+        },
+        {
+            "from": 7,
+            "to": 8,
+            "label": "HX2-ABCDE"
+        },
+        {
+            "from": 8,
+            "to": 9,
+            "label": "F1-ECD-AB"
+        },
+        {
+            "from": 8,
+            "to": 10,
+            "label": "F1-ECD-AB"
+        },
+        {
+            "from": 9,
+            "to": 11,
+            "label": "SP1-RAB"
+        },
+        {
+            "from": 9,
+            "to": 12,
+            "label": "SP1-RAB"
+        },
+        {
+            "from": 10,
+            "to": 13,
+            "label": "DIST-ECD-AB"
+        },
+        {
+            "from": 10,
+            "to": 14,
+            "label": "DIST-ECD-AB"
+        },
+        {
+            "from": 12,
+            "to": 15,
+            "label": "PC0-RAB"
+        },
+        {
+            "from": 15,
+            "to": 18,
+            "label": "HX0-RAB"
+        },
+        {
+            "from": 18,
+            "to": 5,
+            "label": "M1-R1",
+            "smooth": { "enabled": true, "type": "curvedCCW", "roundness": 0.3 }
+        },
+        {
+            "from": 14,
+            "to": 16,
+            "label": "DIST-E-CD"
+        },
+        {
+            "from": 14,
+            "to": 17,
+            "label": "DIST-E-CD"
+        },
+        {
+            "from": 16,
+            "to": 19,
+            "label": "DIST-C-D"
+        },
+        {
+            "from": 16,
+            "to": 20,
+            "label": "DIST-C-D"
+        },
+        {
+            "from": 17,
+            "to": 21,
+            "label": "HX1-E"
+        },
+        {
+            "from": 19,
+            "to": 22,
+            "label": "HX0-D"
+        },
+        {
+            "from": 20,
+            "to": 23,
+            "label": "SP1-RC"
+        },
+        {
+            "from": 20,
+            "to": 24,
+            "label": "SP1-RC"
+        },
+        {
+            "from": 24,
+            "to": 25,
+            "label": "P1-RC"
+        },
+        {
+            "from": 25,
+            "to": 26,
+            "label": "HX1-RC"
+        },
+        {
+            "from": 26,
+            "to": 5,
+            "label": "M1-R1",
+            "smooth": { "enabled": true, "type": "curvedCCW", "roundness": 0.3 }
+        },
+        {
+            "from": 5,
+            "to": 6,
+            "label": "R1"
+        }
+    ]
+}
