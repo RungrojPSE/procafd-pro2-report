@@ -1,0 +1,1 @@
+./main.exe --report "path/to/your/excel.xlsx"

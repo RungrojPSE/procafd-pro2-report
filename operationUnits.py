@@ -1,9 +1,89 @@
 import re
 import json
+import string
+import pandas as pd
+import numpy as np
+
+
+def separate_script(filename='HDA-PRO2-Summary Report.xlsx'):
+    # Load the Excel file
+    filename = 'HDA-PRO2-Summary Report.xlsx'
+    excel_file = pd.ExcelFile(filename)
+
+    # Get the sheet names
+    sheet_names = excel_file.sheet_names
+    df = pd.read_excel(filename, sheet_name=sheet_names[1])
+
+    # Extract non-null values from the 'Index' column
+    text_data = df['Index'].dropna().tolist()
+
+    # Write data to a text file starting from the first line containing "Generated"
+    write_flag = False  # Flag to start writing when "Generated" is found
+    with open("pro2-temp.txt", "w") as file:
+        for line in text_data:
+            if not write_flag:
+                if "Generated" in line:  # Check if "Generated" exists in the current line
+                    write_flag = True
+            if write_flag:
+                file.write(line + "\n")
+
+
+def get_stream_table(filename='HDA-PRO2-Summary Report.xlsx'):
+
+    # Load Excel file and sheet
+    # filename = 'HDA-PRO2-Summary Report.xlsx'
+    sheet_name = 3  # Specify the sheet index or name
+    df = pd.read_excel(filename, sheet_name=sheet_name, header=None)  # Load without headers
+
+    # Find the starting position of the table (cell containing "Stream (Summary)")
+    start_row, start_col = None, None
+    rows, columns = df.shape
+
+    for i in range(rows):
+        for j in range(columns):
+            if "Stream  (Summary)" in str(df.iloc[i, j]):
+                start_row, start_col = i, j
+                break
+        if start_row is not None:
+            break
+
+    # print(f"Start position: row {start_row}, column {start_col}")
+
+    df = pd.read_excel(filename, sheet_name=sheet_name, skiprows=start_row)
+    df = df.dropna(axis=1, how='all')
+
+    return df
+
+def get_stream_data(df):
+    d_txt = {}
+    for stream in df.columns[2:]:
+        txt = []
+        nan_count = 0
+        for index, row in df.iterrows():
+            if pd.isna(row['UOM']):
+                s = f"{row['Stream  (Summary)']}: {row[stream]}"
+            else:
+                if pd.isna(row[stream]):
+                    s = f"{row['Stream  (Summary)']} ({row['UOM']}):"
+                else:
+                    s = f"{row['Stream  (Summary)']} ({row['UOM']}): {row[stream]}"
+            txt.append(s)
+
+            if pd.isna(row[stream]):
+                nan_count += 1  # Increment by 1
+            if nan_count == 3:
+                break
+
+        txt = txt[:-1]
+        d_txt[stream] = txt
+
+    return d_txt
+
+
 
 def parse_ctx():
     # 1. get pro2 script
-    file_path = "sample_full.txt"
+    file_path = "pro2-temp.txt"
     with open(file_path, "r") as file:
         text_content = file.read()
 
@@ -13,7 +93,9 @@ def parse_ctx():
     sections = slice_section(text_content)
     nodes = []
     for text in sections:
-        if text.startswith("STREAM DATA"):
+        if text.startswith("COMPONENT DATA"):
+            components = parse_component_data(text)
+        elif text.startswith("STREAM DATA"):
             nodes.extend(parse_stream_data(text))
         elif text.startswith("UNIT OPERATIONS"):
             nodes.extend(parse_unit_operations(text))
@@ -87,11 +169,11 @@ def parse_ctx():
     # Output edges
     # print(edges)
 
-    create_graph_data(nodes, edges)
+    # create_graph_data(nodes, edges)
 
     print(nodes)
 
-    return nodes, edges
+    return nodes, edges, components
 
 def slice_section(section_text):
     """
@@ -116,7 +198,7 @@ def slice_section(section_text):
 
 
 
-def create_graph_data(nodes, edges):
+def create_graph_data(nodes, edges, file_path="vis-plot/data.json"):
     
     # Define nodes and edges
     data = {
@@ -125,10 +207,65 @@ def create_graph_data(nodes, edges):
     }
 
     # Write the data to a JSON file
-    with open("vis-plot/data.json", "w") as json_file:
+    with open(file_path, "w") as json_file:
         json.dump(data, json_file, indent=4)
 
-    print("data.json created successfully!")
+    # print("data.json created successfully!")
+    
+
+def create_graph_data2(components, processes, roles, esfiles, nodes, edges, file_path="lv3a.json"):
+    
+    # Define nodes and edges
+    data = {
+        "components": components,
+        "processes": processes,
+        "roles": roles,
+        "esfiles": esfiles,
+        "nodes": nodes,
+        "edges": edges
+    }
+
+    # Write the data to a JSON file
+    with open(file_path, "w") as json_file:
+        json.dump(data, json_file, indent=4)
+
+    # print("data.json created successfully!")
+    
+
+def parse_process_data(nodes):
+    units = {}
+    for n in nodes:
+        if n['properties']['kind'] not in ['START', 'END']:
+            kind = n['properties']['kind']
+            # Initialize the list if the kind is not already in units
+            if kind not in units:
+                units[kind] = []
+            units[kind].append(n['label'])
+
+    processes = []
+    for key, val in units.items(): 
+        processes.append({
+            'label': ", ".join(val),
+            'value': key
+        })
+
+    return processes
+
+
+def parse_component_data(text_content):
+    # Regular expression to extract chemical names
+    pattern = r"\b\d+,([A-Z]+)"
+
+    # Find all matches
+    matches = re.findall(pattern, text_content)
+
+    # Create alphabetical labels (A, B, C...)
+    labels = string.ascii_uppercase
+
+    # Build the output JSON structure
+    output = [{"label": labels[i], "value": matches[i]} for i in range(len(matches))]
+
+    return output
 
 def parse_stream_data(text_content):
     # Define a list to store the parsed stream data

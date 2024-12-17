@@ -1,0 +1,527 @@
+{
+    "components": [
+        {
+            "label": "A",
+            "value": "HYDROGEN"
+        },
+        {
+            "label": "B",
+            "value": "METHANE"
+        },
+        {
+            "label": "C",
+            "value": "TOLUENE"
+        },
+        {
+            "label": "D",
+            "value": "BENZENE"
+        },
+        {
+            "label": "E",
+            "value": "BIPH"
+        }
+    ],
+    "processes": [
+        {
+            "label": "HX1-IC, HX0-IAB, HX2-ABCDE, HX0-RAB, HX1-RC, HX1-E, HX0-D",
+            "value": "HX"
+        },
+        {
+            "label": "R1, R2",
+            "value": "CONREACTOR"
+        },
+        {
+            "label": "F1-ECD-AB",
+            "value": "FLASH"
+        },
+        {
+            "label": "SP1-RAB, SP1-RC",
+            "value": "SPLITTER"
+        },
+        {
+            "label": "PC0-RAB",
+            "value": "COMPRESSOR"
+        },
+        {
+            "label": "DIST-ECD-AB, DIST-E-CD, DIST-C-D",
+            "value": "COLUMN"
+        },
+        {
+            "label": "P1-RC",
+            "value": "PUMP"
+        },
+        {
+            "label": "M1-R1",
+            "value": "MIXER"
+        }
+    ],
+    "roles": [
+        {
+            "label": "Input Components",
+            "value": "#63a2ff"
+        },
+        {
+            "label": "Recycled Components",
+            "value": "#6EC207"
+        },
+        {
+            "label": "Released Components",
+            "value": "#f49689"
+        },
+        {
+            "label": "Output Components",
+            "value": "#fdc62c"
+        },
+        {
+            "label": "Linked Components",
+            "value": "#f9f9f9"
+        }
+    ],
+    "esfiles": [
+        "(iC)",
+        "(mABC)<1<2",
+        "[<(iAB)]",
+        "(eABC)",
+        "(reABC/ABCDE)",
+        "(eABCDE)",
+        "(flAB/ABECD)",
+        "[(prgAB/AB)[(oAB)](cAB)1]",
+        "(dlAB/CDE)",
+        "[(oAB)]",
+        "(dlD/CE)",
+        "[(eD)(oD)]",
+        "(dlC/E)",
+        "[(eE)(oE)]",
+        "(prgC/C)",
+        "[(oC)]",
+        "(pC)2"
+    ],
+    "nodes": [
+        {
+            "id": 1,
+            "label": "IAB-HI",
+            "level": 0,
+            "properties": {
+                "role": "Input Components"
+            }
+        },
+        {
+            "id": 2,
+            "label": "IC-HI",
+            "level": 0,
+            "properties": {
+                "role": "Input Components"
+            }
+        },
+        {
+            "id": 3,
+            "label": "IAB",
+            "level": 1,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 4,
+            "label": "IC",
+            "level": 1,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 5,
+            "label": "FRT",
+            "level": 2,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 6,
+            "label": "INTER1",
+            "level": 3,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 7,
+            "label": "ABCDE-HI",
+            "level": 4,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 8,
+            "label": "ABCDE",
+            "level": 5,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 9,
+            "label": "AB",
+            "level": 6,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 10,
+            "label": "ABCDE-INT",
+            "level": 6,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 11,
+            "label": "S1-RAB",
+            "level": 7,
+            "properties": {
+                "role": "Released Components"
+            }
+        },
+        {
+            "id": 12,
+            "label": "RAB-PC",
+            "level": 7,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 13,
+            "label": "AB-FL",
+            "level": 7,
+            "properties": {
+                "role": "Output Components"
+            }
+        },
+        {
+            "id": 14,
+            "label": "CDE",
+            "level": 7,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 15,
+            "label": "RAB-HI",
+            "level": 8,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 16,
+            "label": "CD",
+            "level": 8,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 17,
+            "label": "E",
+            "level": 8,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 18,
+            "label": "RAB",
+            "level": 9,
+            "properties": {
+                "role": "Recycled Components"
+            }
+        },
+        {
+            "id": 19,
+            "label": "D",
+            "level": 9,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 20,
+            "label": "C",
+            "level": 9,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 21,
+            "label": "E-STORAGE",
+            "level": 9,
+            "properties": {
+                "role": "Output Components"
+            }
+        },
+        {
+            "id": 22,
+            "label": "D-STORAGE",
+            "level": 10,
+            "properties": {
+                "role": "Output Components"
+            }
+        },
+        {
+            "id": 23,
+            "label": "S1-RC",
+            "level": 10,
+            "properties": {
+                "role": "Released Components"
+            }
+        },
+        {
+            "id": 24,
+            "label": "RC-PU",
+            "level": 10,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 25,
+            "label": "RC-HI",
+            "level": 11,
+            "properties": {
+                "role": "Linked Components"
+            }
+        },
+        {
+            "id": 26,
+            "label": "RC",
+            "level": 12,
+            "properties": {
+                "role": "Recycled Components"
+            }
+        }
+    ],
+    "edges": [
+        {
+            "from": 1,
+            "to": 3,
+            "label": "HX0-IAB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 2,
+            "to": 4,
+            "label": "HX1-IC",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 4,
+            "to": 5,
+            "label": "M1-R1",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 3,
+            "to": 5,
+            "label": "M1-R1",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 6,
+            "to": 7,
+            "label": "R2",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 7,
+            "to": 8,
+            "label": "HX2-ABCDE",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 8,
+            "to": 9,
+            "label": "F1-ECD-AB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 8,
+            "to": 10,
+            "label": "F1-ECD-AB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 9,
+            "to": 11,
+            "label": "SP1-RAB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 9,
+            "to": 12,
+            "label": "SP1-RAB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 10,
+            "to": 13,
+            "label": "DIST-ECD-AB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 10,
+            "to": 14,
+            "label": "DIST-ECD-AB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 12,
+            "to": 15,
+            "label": "PC0-RAB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 15,
+            "to": 18,
+            "label": "HX0-RAB",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 18,
+            "to": 5,
+            "label": "M1-R1",
+            "properties": {
+                "recycle": true
+            }
+        },
+        {
+            "from": 14,
+            "to": 16,
+            "label": "DIST-E-CD",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 14,
+            "to": 17,
+            "label": "DIST-E-CD",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 16,
+            "to": 19,
+            "label": "DIST-C-D",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 16,
+            "to": 20,
+            "label": "DIST-C-D",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 17,
+            "to": 21,
+            "label": "HX1-E",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 19,
+            "to": 22,
+            "label": "HX0-D",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 20,
+            "to": 23,
+            "label": "SP1-RC",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 20,
+            "to": 24,
+            "label": "SP1-RC",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 24,
+            "to": 25,
+            "label": "P1-RC",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 25,
+            "to": 26,
+            "label": "HX1-RC",
+            "properties": {
+                "recycle": false
+            }
+        },
+        {
+            "from": 26,
+            "to": 5,
+            "label": "M1-R1",
+            "properties": {
+                "recycle": true
+            }
+        },
+        {
+            "from": 5,
+            "to": 6,
+            "label": "R1",
+            "properties": {
+                "recycle": false
+            }
+        }
+    ]
+}

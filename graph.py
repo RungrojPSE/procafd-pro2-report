@@ -136,26 +136,10 @@ def assign_level(nodes, edges, remove_cycle=True):
     for root in root_nodes:
         traverse_and_set_levels(root, 0)
 
-    create_graph_data(nodes, edges)
+    
 
     # Print the result
     return nodes
-
-
-
-def create_graph_data(nodes, edges):
-    
-    # Define nodes and edges
-    data = {
-        "nodes": nodes,
-        "edges": edges
-    }
-
-    # Write the data to a JSON file
-    with open("vis-plot/data.json", "w") as json_file:
-        json.dump(data, json_file, indent=4)
-
-    print("data.json created successfully!")
 
 
 def reassign_ids(nodes, edges):
@@ -198,11 +182,37 @@ def hypergraph_nodes_edges(nodes, edges):
 
     for edge in edges:
         idH = f"{edge['from']}-{edge['to']}"
+
+        # classify role
+        role = "Linked Components"
+        
+        level_from = get_node_prop('level', edge['from'])
+        level_to = get_node_prop('level', edge['to'])
+        recycle = False
+
+        prop_from = get_node_prop('properties', edge['from'])
+        prop_to = get_node_prop('properties', edge['to'])
+        if prop_from['kind'] == 'START':
+            role = "Input Components"
+        
+        if prop_to['kind'] == 'END':
+            role = "Output Components"
+            if prop_from['kind'] == 'SPLITTER':
+                role = "Released Components"
+
+        # Check this
+        if level_from > level_to:
+            role = "Recycled Components"
+            recycle = True
+
         nodesH.append(
             {
             'id': idH,
             'label': edge['label'],
-            'level': get_node_prop('level', edge['from'])
+            'level': level_from,
+            'properties': {
+                    'role': role
+                }
             }
         )
 
@@ -214,6 +224,9 @@ def hypergraph_nodes_edges(nodes, edges):
                     'from': idH,
                     'to': idH_next,
                     'label': get_node_prop('label', edge['to']),
+                    'properties': {
+                        'recycle': recycle
+                    }
                 }
             )
 
